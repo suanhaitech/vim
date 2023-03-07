@@ -1,0 +1,27 @@
+#!/bin/bash
+
+src_dir=`pwd`
+
+cd ${src_dir}/bundle
+git clone git@github.com:VundleVim/Vundle.vim.git 
+git clone git@github.com:ycm-core/YouCompleteMe.git
+git clone git@github.com:honza/vim-snippets.git
+git clone git@github.com:SirVer/ultisnips.git  
+git clone git@github.com:volca/markdown-preview.git 
+git clone git@github.com:vim-scripts/minibufexpl.vim.git  
+git clone git@github.com:altercation/vim-colors-solarized.git  
+git clone git@github.com:vim-latex/vim-latex.git  
+git clone git@github.com:xuhdev/vim-latex-live-preview.git 
+git clone git@github.com:preservim/vim-markdown.git  
+
+cd
+rm -f .vimrc
+rm -fr .vim
+
+# 创建符号链接
+cd ${src_dir}
+ln -s ${src_dir}/vimrc ~/.vimrc
+ln -s ${src_dir} ~/.vim
+
+vim +PluginInstall +qall
+
