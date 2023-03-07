@@ -14,6 +14,14 @@ git clone git@github.com:vim-latex/vim-latex.git
 git clone git@github.com:xuhdev/vim-latex-live-preview.git 
 git clone git@github.com:preservim/vim-markdown.git  
 
+
+# 编译安装 YouCompleteMe
+cd YouCompleteMe
+sudo apt install build-essential cmake vim-nox python3-dev
+sudo apt install mono-complete golang nodejs openjdk-17-jdk openjdk-17-jre npm
+sudo pip3 install jedi
+python3 install.py --clangd-complete --clang-complete
+
 cd
 rm -f .vimrc
 rm -fr .vim
