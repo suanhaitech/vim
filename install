@@ -1,27 +1,8 @@
 #!/bin/bash
 
+sudo apt install vim-nox
+
 src_dir=`pwd`
-
-cd ${src_dir}/bundle
-git clone git@github.com:VundleVim/Vundle.vim.git 
-git clone git@github.com:ycm-core/YouCompleteMe.git
-git clone git@github.com:honza/vim-snippets.git
-git clone git@github.com:SirVer/ultisnips.git  
-git clone git@github.com:volca/markdown-preview.git 
-git clone git@github.com:vim-scripts/minibufexpl.vim.git  
-git clone git@github.com:altercation/vim-colors-solarized.git  
-git clone git@github.com:vim-latex/vim-latex.git  
-git clone git@github.com:xuhdev/vim-latex-live-preview.git 
-git clone git@github.com:preservim/vim-markdown.git  
-
-
-# 编译安装 YouCompleteMe
-cd YouCompleteMe
-sudo apt install build-essential cmake vim-nox python3-dev
-sudo apt install mono-complete golang nodejs openjdk-17-jdk openjdk-17-jre npm
-sudo pip3 install jedi
-sudo apt install clang libclang-dev
-python3 install.py --system-libclang --clang-complete --clangd-complete 
 
 cd
 rm -f .vimrc
