@@ -68,21 +68,36 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-
+"------------------------------------------------------------------------------
 " let Vundle manage Vundle, required
+"------------------------------------------------------------------------------
 Plugin 'VundleVim/Vundle.vim'
+"------------------------------------------------------------------------------
 
-" Track the engine.
+"------------------------------------------------------------------------------
+" ultisnips 
+"------------------------------------------------------------------------------
 Plugin 'SirVer/ultisnips'
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+"------------------------------------------------------------------------------
 
-" Snippets are separated from the engine. Add this if you want them:
+"------------------------------------------------------------------------------
+" Snippets
+"------------------------------------------------------------------------------
 Plugin 'honza/vim-snippets'
-
 " let g:UltiSnipsSnippetDirectories=[$HOME."/.vim/mysnippets"]
-let g:UltiSnipsSnippetDirectories=["../mysnippets", "../bundle/vim-snippets/UltiSnips"]
+" let g:UltiSnipsSnippetDirectories=["../mysnippets", "../bundle/vim-snippets/UltiSnips"]
 " let g:UltiSnipsSnippetDirectories=["../bundle/vim-snippets"]
+"------------------------------------------------------------------------------
 
-" 代码自动补全 
+"------------------------------------------------------------------------------
+" YouCompleteMe 
+"------------------------------------------------------------------------------
 Plugin 'Valloric/YouCompleteMe'
 let g:ycm_python_binary_path = '/usr/bin/python3'
 let g:ycm_server_python_interpreter='/usr/bin/python3'
@@ -93,53 +108,98 @@ let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:ycm_confirm_extra_conf = 0
+"------------------------------------------------------------------------------
 
+"------------------------------------------------------------------------------
 " Several modern GUI editors list your open buffers as tabs along the top or bottom of your screen
 Plugin 'fholgado/minibufexpl.vim'
+"------------------------------------------------------------------------------
 
+"------------------------------------------------------------------------------
 " markdown
+"------------------------------------------------------------------------------
 Plugin 'plasticboy/vim-markdown'
 let g:vim_markdown_math = 1
 let g:vim_markdown_folding_disabled = 1
+"------------------------------------------------------------------------------
 
+"------------------------------------------------------------------------------
 " latex
+"------------------------------------------------------------------------------
 Plugin 'vim-latex/vim-latex'
 let g:Imap_UsePlaceHolders = 0
+"------------------------------------------------------------------------------
 
-" latex 预览
+"------------------------------------------------------------------------------
+" latex-live-preview 
+"------------------------------------------------------------------------------
 Plugin 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 " let g:livepreview_engine = 'livepreview_engine', ['pdflatex', 'xelatex']
 " let g:tex_flavor = "xelatex"
 " let g:tex_flavor = "latex"
+"------------------------------------------------------------------------------
 
-" markdown 预览
+"------------------------------------------------------------------------------
+" markdown-preview 
+"------------------------------------------------------------------------------
 Plugin 'iamcco/markdown-preview.nvim' 
+"------------------------------------------------------------------------------
 
+"------------------------------------------------------------------------------
+" jedi-vim
+"------------------------------------------------------------------------------
+Plugin 'davidhalter/jedi-vim'
+"------------------------------------------------------------------------------
+
+
+"------------------------------------------------------------------------------
+" syntastic
+"------------------------------------------------------------------------------
+Plugin 'vim-syntastic/syntastic'
+" Syntastic settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" C/C++ checker
+let g:syntastic_c_checkers = ['gcc']
+let g:syntastic_cpp_checkers = ['gcc']
+
+" Python checker
+let g:syntastic_python_checkers = ['flake8']
+"------------------------------------------------------------------------------
+
+"------------------------------------------------------------------------------
+" NERDTree
+"------------------------------------------------------------------------------
+Plugin 'preservim/nerdtree'
+"------------------------------------------------------------------------------
+
+"------------------------------------------------------------------------------
+" vim-airline
+"------------------------------------------------------------------------------
+Plugin 'vim-airline/vim-airline'
+"------------------------------------------------------------------------------
+
+"------------------------------------------------------------------------------
+" vim-airline-themes
+"------------------------------------------------------------------------------
+Plugin 'vim-airline/vim-airline-themes'
+"------------------------------------------------------------------------------
+
+"------------------------------------------------------------------------------
+" vim-fugitive
+"------------------------------------------------------------------------------
+Plugin 'tpope/vim-fugitive'
+"------------------------------------------------------------------------------
 
 call vundle#end()            " required
 
 filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
 
-" Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
-" - https://github.com/Valloric/YouCompleteMe
-" - https://github.com/nvim-lua/completion-nvim
-
-" better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
-
+execute pathogen#infect()
