@@ -19,6 +19,7 @@ repos=( "VundleVim/Vundle.vim" "SirVer/ultisnips" "honza/vim-snippets"
         "vim-latex/vim-latex" "xuhdev/vim-latex-live-preview" "preservim/vim-markdown" "vim-syntastic/syntastic"
         "preservim/nerdtree" "vim-airline/vim-airline"
         "vim-airline/vim-airline-themes" "tpope/vim-fugitive"
+        'kkoomen/vim-doge'
         )
 # 仓库个数
 num_repos=${#repos[@]}
