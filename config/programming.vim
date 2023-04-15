@@ -1,4 +1,4 @@
-# 
+" 插入Doygen 的注释 
 function! InsertDoxygenComment()
   let l:line = getline('.')
   let l:language = &filetype
