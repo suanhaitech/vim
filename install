@@ -56,7 +56,7 @@ if [ -d "YouCompleteMe" ]; then
   else
       echo "正在更新 YouComplete"
       cd YouCompleteMe
-      git pull
+      git pull #TODO: need recomple?
       cd ..
   fi
 ## 2. 没有这个仓库就克隆

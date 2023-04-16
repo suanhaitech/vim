@@ -210,3 +210,9 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 execute pathogen#infect()
+
+"------------------------------------------------------------------------------
+" 自定义的快捷命令
+"------------------------------------------------------------------------------
+let mapleader = ","
+nnoremap <leader>sv :source $MYVIMRC<CR>
