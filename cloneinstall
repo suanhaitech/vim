@@ -1,0 +1,86 @@
+#!/bin/bash
+
+
+src_dir=`pwd`
+# 判断是否有 bundle 这个文件夹，没有就创建一个
+if [ -d "bundle" ]; then
+    cd bundle
+else
+    mkdir bundle
+    echo "创建 bundle 文件夹"
+    cd bundle
+fi
+
+# 进入 bundle
+
+# 需要的插件仓库
+repos=( "VundleVim/Vundle.vim" "SirVer/ultisnips" "honza/vim-snippets"
+        "volca/markdown-preview" "vim-scripts/minibufexpl.vim" "altercation/vim-colors-solarized"
+        "vim-latex/vim-latex" "xuhdev/vim-latex-live-preview" "preservim/vim-markdown" "vim-syntastic/syntastic"
+        "preservim/nerdtree" "vim-airline/vim-airline"
+        "vim-airline/vim-airline-themes" "tpope/vim-fugitive"
+        "kkoomen/vim-doge" "tpope/vim-projectionist"
+        )
+# 仓库个数
+num_repos=${#repos[@]}
+
+# 循环每个仓库
+for ((i=0; i<num_repos; i++)); do
+  repo=${repos[$i]}
+  ## 1. 如果该仓库已经有了就更新
+  if [ -d ${repo#*/} ]; then
+      ### 1.1 指定不需要更新时那就不用更新
+      if [[ " $@ " =~ " -notpull " ]]; then
+          echo "没有更新 $repo, 已完成 $i/$num_repos"
+      ### 1.2 没有指定不需要更新那就更新
+      else
+          echo "正在更新 $repo, 已完成 $i/$num_repos"
+          cd ${repo#*/}
+          git pull
+          cd ..
+      fi
+  ## 2. 没有这个仓库就克隆
+  else
+      echo "正在克隆 $repo, 已完成 $i/$num_repos"
+      git clone "git@github.com:$repo.git" 
+  fi
+done
+
+# 安装 YouCompleteMe
+## 1. 如果该仓库已经有了就更新
+if [ -d "YouCompleteMe" ]; then
+  ### 1.1 指定不需要更新时那就不用更新
+  if [[ " $@ " =~ " -notpull " ]]; then
+      echo "没有更新 YouComplete"
+  ### 1.2 没有指定不需要更新那就更新
+  else
+      echo "正在更新 YouComplete"
+      cd YouCompleteMe
+      git pull #TODO: need recomple?
+      cd ..
+  fi
+## 2. 没有这个仓库就克隆
+else
+  echo "正在克隆 YouComplete"
+  git clone --recurse-submodules "git@github.com:ycm-core/YouCompleteMe.git" 
+
+  ## 3. 安装
+  cd YouCompleteMe
+  python3 install.py --clangd-completer
+  cd ..
+fi
+
+
+# 删除主目录下 .vim 文件夹链接
+cd
+rm -f .vimrc
+rm -fr .vim
+
+# 创建新的文件链接
+cd ${src_dir}
+ln -s ${src_dir}/vimrc ~/.vimrc
+ln -s ${src_dir} ~/.vim
+
+# 安装所有插件
+vim +PluginInstall +qall
+
