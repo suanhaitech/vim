@@ -13,8 +13,8 @@ set textwidth=80
 set nocompatible
 set formatoptions+=m
 
-autocmd Filetype cpp setlocal ts=2 sw=2 expandtab
-autocmd Filetype h setlocal ts=2 sw=2 expandtab
+autocmd Filetype cpp setlocal ts=4 sw=4 expandtab
+autocmd Filetype h setlocal ts=4 sw=4 expandtab
 
 hi Comment ctermfg=LightBlue
 " Add 'k' to the list to enable dictionary completion source
